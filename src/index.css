@@ -1,0 +1,26 @@
+.fa-brands {
+  cursor: pointer;
+}
+.fa-brands {
+  transition: 0.5s rotate;
+
+}
+.fa-brands:hover {
+  color: blueviolet;
+  /* border: 2px solid blueviolet; */
+  border-radius: 10px;
+}
+.fa-phone:hover {
+  color: blueviolet;
+  /* border: 2px solid blueviolet; */
+  border-radius: 10px;
+}
+.history-btn:hover {
+    background-color: blueviolet;
+    color: white;
+    transition: 0.5s;
+}
+::-webkit-scrollbar{
+    /* display: none; */
+    overflow: hidden;
+}
