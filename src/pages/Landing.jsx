@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import Cards from "../components/Cards";
 
 const Landing = () => {
@@ -12,8 +12,9 @@ const Landing = () => {
         <div className="left col-lg-6 ps-3 py-3 d-flex flex-column mb-sm-4">
           <h1 className="">
             Welcome to{" "}
-            <span className="fw-bold" style={{color:"blueviolet"}}
-            >Melofy</span>
+            <span className="fw-bold" style={{ color: "blueviolet" }}>
+              Melofy
+            </span>
           </h1>
           <p>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis
@@ -29,7 +30,10 @@ const Landing = () => {
             to={"/home"}
             className="d-flex justify-content-center justify-content-md-start text-decoration-none w-100 w-sm-50"
           >
-            <button style={{backgroundColor:"blueviolet"}} className="btn text-white fw-bold my-2 p-2 w-100">
+            <button
+              style={{ backgroundColor: "blueviolet" }}
+              className="btn text-white fw-bold my-2 p-2 w-100"
+            >
               Get Started
             </button>
           </Link>
@@ -45,7 +49,7 @@ const Landing = () => {
           />
         </div>
       </div>
-      <Cards/>
+      <Cards />
       <Footer />
     </div>
   );

@@ -1,3 +1,6 @@
+body{
+  letter-spacing: 1px;
+}
 .fa-brands {
   cursor: pointer;
 }
@@ -23,4 +26,14 @@
 ::-webkit-scrollbar{
     /* display: none; */
     overflow: hidden;
+}
+.video-active:hover{
+  transform: scale(1.1);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+.video-del:hover{
+  transform: scale(1.3);
+}
+.video-link:hover{
+  color: rgb(78, 10, 224);
 }

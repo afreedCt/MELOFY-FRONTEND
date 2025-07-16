@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { toast } from "react-toastify";
+import { addVideoAPI } from "../service/allAPI";
 
 const Add = () => {
   const [show, setShow] = useState(false);
@@ -34,7 +35,7 @@ const Add = () => {
       let videoId = url.split("v=")[1].slice(0, 11);
       setVideoDetails({
         ...videoDetails,
-        youtubeUrl: `https://www.youtube.com/embed/${videoId}`,
+        youtubeUrl: `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`,
       });
     } else {
       setVideoDetails({ ...videoDetails, youtubeUrl: "" });
@@ -43,10 +44,19 @@ const Add = () => {
   };
 
   // handle add button (form submition)
-  const handleUpload = () => {
+  const handleUpload = async () => {
     const { caption, imgaeUrl, youtubeUrl } = videoDetails;
     if (caption && imgaeUrl && youtubeUrl) {
       // api
+      try {
+        let res = await addVideoAPI(videoDetails);
+        if (res.request.status >= 200 && res.request.status < 300) {
+          toast.success(`${res.data.caption} added successfully`);
+          handleClose();
+        }
+      } catch (error) {
+        console.log("arror to add video", error);
+      }
     } else {
       console.log("calling");
       toast.info("enter the fields ");
@@ -56,12 +66,19 @@ const Add = () => {
   return (
     <>
       <div className="d-flex justify-content-around mt-4 flex-column flex-md-row">
-        <h1 className="btn mt-2 rounded-2 shadow" style={{backgroundColor:"blueviolet",color:"white" }} onClick={handleShow}>
+        <h1
+          className="btn mt-2 rounded-2 shadow"
+          style={{ backgroundColor: "blueviolet", color: "white" }}
+          onClick={handleShow}
+        >
           Upload New Video{" "}
           <i className="p-2 fa-solid fa-plus  rounded-circle border border-2 border-white ms-2 cursor-pointer"></i>
         </h1>
         <Link to={"/history"} className="text-decoration-none  ">
-          <h1 style={{border:"2px solid blueviolet"}} className="history-btn shadow fs-4 mt-2 p-2 rounded-2 d-flex justify-content-center align-items-center cursor-pointer">
+          <h1
+            style={{ border: "2px solid blueviolet" }}
+            className="history-btn shadow fs-4 mt-2 p-2 rounded-2 d-flex justify-content-center align-items-center cursor-pointer"
+          >
             watch History
           </h1>
         </Link>

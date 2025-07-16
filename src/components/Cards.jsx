@@ -22,7 +22,7 @@ const Cards = () => {
             </Card.Text>
           </Card.Body>
         </Card>
-        <Card style={{ width: "18rem" }} className="rounded-3"> 
+        <Card style={{ width: "18rem" }} className="rounded-3">
           <Card.Img
             variant="top"
             src="https://media.tenor.com/images/df52aee1ab2d96e32dbd6bb6c9c68420/tenor.gif"

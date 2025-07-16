@@ -1,27 +1,25 @@
-import React from 'react'
-import { Col, Row } from 'react-bootstrap'
-import VideoCard from './VideoCard'
+import React, { useEffect } from "react";
+import { Col, Row } from "react-bootstrap";
+import VideoCard from "./VideoCard";
 
-const View = () => {
+const View = ({ videos }) => {
+  // let item={
+  //   caption:"afreed",imgaeUrl:"afreeeee",youtubeUrl:"https://www.youtube.com/embed/izbydia9jz4?autoplay=1&mute=1"
+  // }
   return (
     <>
-    <Row>
-      <Col lg={4} md={6} sm={12}>
-      <VideoCard/>
-      </Col>
-      <Col lg={4} md={6} sm={12}>
-      <VideoCard/>
-      </Col>
-      <Col lg={4} md={6} sm={12}>
-      <VideoCard/>
-      </Col>
-      <Col lg={4} md={6} sm={12}>
-      <VideoCard/>
-      </Col>
-    </Row>
-    
+      <Row>
+        {videos.map((item) => (
+          <Col key={item.id} lg={4} md={6} sm={12}>
+            <VideoCard item={item} />
+          </Col>
+        ))}
+       {/* <Col key={item.id} lg={4} md={6} sm={12}>
+            <VideoCard item={item} />
+          </Col> */}
+      </Row>
     </>
-  )
-}
+  );
+};
 
-export default View
+export default View;
