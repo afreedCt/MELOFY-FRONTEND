@@ -8,7 +8,7 @@ const Landing = () => {
   return (
     <div>
       <Header />
-      <div className="p-3 row ">
+      <div className="p-3 row ms-md-4">
         <div className="left col-lg-6 ps-3 py-3 d-flex flex-column mb-sm-4">
           <h1 className="">
             Welcome to{" "}
