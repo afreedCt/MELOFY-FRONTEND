@@ -5,6 +5,7 @@ import Card from "react-bootstrap/Card";
 const Cards = () => {
   return (
     <div>
+      <h1 className="fw-bold text-center my-2" style={{color:"blueviolet"}}>Features</h1>
       <div className="cards d-flex flex-wrap justify-content-center gap-3 my-3">
         <Card style={{ width: "18rem" }} className="rounded-3">
           <Card.Img

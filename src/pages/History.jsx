@@ -3,16 +3,43 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Table from "react-bootstrap/Table";
 import { Link } from "react-router-dom";
-import { getAllVideoAPI } from "../service/allAPI";
+import {
+  deleteHistoryAPI,
+  getAllVideoAPI,
+  getHistoryDataAPI,
+} from "../service/allAPI";
+import { toast } from "react-toastify";
 
 const History = () => {
-  const [videos, setVideos] = useState([]);
+  const [historyData, setHistoryData] = useState([]);
   useEffect(() => {
-    getAllVideoAPI().then((res) => {
-      setVideos(res.data);
-      console.log("history", res.data);
-    });
+    getHistoryData();
   }, []);
+
+  const getHistoryData = async () => {
+    try {
+      let res = await getHistoryDataAPI();
+      console.log("history", res);
+      if (res.request.status >= 200 && res.request.status < 300) {
+        setHistoryData(res.data);
+      }
+    } catch (error) {
+      console.log("error to get hisory data", error);
+    }
+  };
+
+  const handleDeleteHistory = async (item) => {
+    try {
+      let res = await deleteHistoryAPI(item.id);
+      if (res.request.status >= 200 && res.request.status < 300) {
+        getHistoryData()
+        toast.success(`${item.caption} removed from history`)
+      }
+    } catch (error) {
+      console.log("error to delete history ",error)
+      toast.warning("error to delete history ",error)
+    }
+  };
   return (
     <div>
       <Header />
@@ -29,43 +56,52 @@ const History = () => {
             </h1>
           </Link>
         </div>
-        <Table
-          striped
-          bordered
-          hover
-          responsive="md"
-          className="mt-2 text-nowrap"
-        >
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Caption</th>
-              <th>Link</th>
-              <th>Date</th>
-              <th>- - -</th>
-            </tr>
-          </thead>
-          <tbody>
-            {videos.map((item) => (
-              <tr key={item.id+item.caption}>
-                <td>{item.id}</td>
-                <td>{item.caption}</td>
-                <td>
-                  <Link
-                    className="video-link"
-                    to={item.youtubeUrl}
-                  >
-                    {item.youtubeUrl}
-                  </Link>
-                </td>
-                <td>11/07/2025</td>
-                <td>
-                  <i className="fa-solid fa-trash text-danger video-del" style={{cursor:"pointer"}}></i>
-                </td>
+        {historyData.length > 0 ? (
+          <Table
+            striped
+            bordered
+            hover
+            responsive="md"
+            className="mt-2 text-nowrap"
+          >
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Caption</th>
+                <th>Link</th>
+                <th>Date</th>
+                <th>- - -</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {historyData.map((item,index) => (
+                <tr key={item.id + item.caption}>
+                  <td>{index+1}</td>
+                  <td>{item.caption}</td>
+                  <td>
+                    <Link className="video-link" to={item.youtubeUrl}>
+                      {item.youtubeUrl}
+                    </Link>
+                  </td>
+                  <td>{item.dateAndTime}</td>
+                  <td>
+                    <i
+                      onClick={() => handleDeleteHistory(item)}
+                      className="fa-solid fa-trash text-danger video-del"
+                      style={{ cursor: "pointer" }}
+                    ></i>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        ) : (
+          <div>
+            <h5 className="text-danger fw-bold text-center">
+              No videos watched yet
+            </h5>
+          </div>
+        )}
       </div>
       <Footer />
     </div>

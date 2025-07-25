@@ -19,16 +19,17 @@ body{
   border-radius: 10px;
 }
 .history-btn:hover {
+    transform: scale(1.1);
     background-color: blueviolet;
     color: white;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 ::-webkit-scrollbar{
     /* display: none; */
     overflow: hidden;
 }
 .video-active:hover{
-  transform: scale(1.1);
+  transform: scale(1.07);
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 .video-del:hover{
@@ -36,4 +37,25 @@ body{
 }
 .video-link:hover{
   color: rgb(78, 10, 224);
+}
+.video-upload-btn:hover{
+  transform: scale(1.1);
+}
+.video-upload-btn i:hover{
+  transform: rotate(360deg);
+  transition: 0.4s;
+}
+.home-btn:hover{
+  color: white;
+  background-color: blueviolet;
+  transition: 0.3s ;
+}
+.category-add-btn:hover{
+   color: white;
+  background-color: blueviolet;
+  transition: 0.3s ;
+  transform: scale(1.1);
+}
+.modal-btn:hover{
+  transform: scale(1.1);
 }

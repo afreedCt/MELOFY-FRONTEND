@@ -8,27 +8,28 @@ import Form from "react-bootstrap/Form";
 import { toast } from "react-toastify";
 import { addVideoAPI } from "../service/allAPI";
 
-const Add = () => {
+const Add = ({setAddVideoRes}) => {
   const [show, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);
     setIsInvalidUrl(false);
     setVideoDetails({
       caption: "",
-      imgaeUrl: "",
+      imageUrl: "",
       youtubeUrl: "",
     });
   };
   const handleShow = () => setShow(true);
   const [videoDetails, setVideoDetails] = useState({
     caption: "",
-    imgaeUrl: "",
+    imageUrl: "",
     youtubeUrl: "",
   });
+  
 
-  const [isInvalidUrl, setIsInvalidUrl] = useState(false);
-  console.log("videodetails", videoDetails);
-
+  const [isInvalidUrl, setIsInvalidUrl] = useState(false);  //to show the url error message
+  
+  // function for making embed url
   const getEmbededUrl = (url) => {
     if (url.includes("v=")) {
       setIsInvalidUrl(false);
@@ -45,21 +46,22 @@ const Add = () => {
 
   // handle add button (form submition)
   const handleUpload = async () => {
-    const { caption, imgaeUrl, youtubeUrl } = videoDetails;
-    if (caption && imgaeUrl && youtubeUrl) {
+    const { caption, imageUrl, youtubeUrl } = videoDetails;
+    if (caption && imageUrl && youtubeUrl) {
       // api
       try {
         let res = await addVideoAPI(videoDetails);
         if (res.request.status >= 200 && res.request.status < 300) {
           toast.success(`${res.data.caption} added successfully`);
           handleClose();
+          setAddVideoRes(res)
         }
       } catch (error) {
-        console.log("arror to add video", error);
+        toast.warning("failed to add video",error)
+        console.log("error to add video", error);
       }
     } else {
-      console.log("calling");
-      toast.info("enter the fields ");
+      toast.warning("enter the fields ");
     }
   };
 
@@ -67,12 +69,12 @@ const Add = () => {
     <>
       <div className="d-flex justify-content-around mt-4 flex-column flex-md-row">
         <h1
-          className="btn mt-2 rounded-2 shadow"
+          className="btn mt-2 rounded-2 shadow video-upload-btn"
           style={{ backgroundColor: "blueviolet", color: "white" }}
           onClick={handleShow}
         >
           Upload New Video{" "}
-          <i className="p-2 fa-solid fa-plus  rounded-circle border border-2 border-white ms-2 cursor-pointer"></i>
+          <i className="p-2 fa-solid fa-plus rounded-circle border border-2 border-white ms-2 cursor-pointer"></i>
         </h1>
         <Link to={"/history"} className="text-decoration-none  ">
           <h1
@@ -120,7 +122,7 @@ const Add = () => {
                 type="link"
                 placeholder="image url"
                 onChange={(e) =>
-                  setVideoDetails({ ...videoDetails, imgaeUrl: e.target.value })
+                  setVideoDetails({ ...videoDetails, imageUrl: e.target.value })
                 }
               />
             </FloatingLabel>
@@ -141,10 +143,10 @@ const Add = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button className="modal-btn" variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleUpload}>
+          <Button className="modal-btn" variant="primary" onClick={handleUpload}>
             Upload
           </Button>
         </Modal.Footer>
