@@ -50,6 +50,21 @@ const Landing = () => {
         </div>
       </div>
       <Cards />
+      {/* video section */}
+
+        <div className="video-section row border m-2 border-3 border-white rounded-3">
+          <div className="left col-md-6 p-3">
+            <h1>Simple fast and powerfull</h1>
+            <p><span className='text-warning'>play everything </span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum deserunt architecto eligendi praesentium vero omnis, non iure eos fugiat earum ducimus dolorem saepe aliquam qui facilis ullam distinctio aperiam sint.</p>
+            <p><span className='text-warning'>play everything </span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum deserunt architecto eligendi praesentium vero omnis, non iure eos fugiat earum ducimus dolorem saepe aliquam qui facilis ullam distinctio aperiam sint.</p>
+            <p><span className='text-warning'>play everything </span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum deserunt architecto eligendi praesentium vero omnis, non iure eos fugiat earum ducimus dolorem saepe aliquam qui facilis ullam distinctio aperiam sint.</p>
+
+          </div>
+          <div className="right col-md-6 d-flex justify-content-center align-items-md-center  ">
+            <iframe className='rounded-5' width="560" height="315" src="https://www.youtube.com/embed/72eQ0seOP1k?si=POxwhssgSuw2bWbq" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+
+          </div>
+        </div>
       <Footer />
     </div>
   );
